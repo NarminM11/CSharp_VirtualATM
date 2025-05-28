@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|c:\\users\\ferid\\desktop\\c#\\c#lesson12_bank\\c#lesson12_bank\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|solutionrelative:c#lesson12_bank\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|c:\\users\\ferid\\desktop\\c#\\c#lesson12_bank\\c#lesson12_bank\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|solutionrelative:c#lesson12_bank\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|c:\\users\\ferid\\desktop\\c#\\c#lesson12_bank\\c#lesson12_bank\\models\\bankcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|solutionrelative:c#lesson12_bank\\models\\bankcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|c:\\users\\ferid\\desktop\\c#\\c#lesson12_bank\\c#lesson12_bank\\models\\bank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64B94A39-A376-400F-8A12-96A97B3502F1}|C#Lesson12_Bank\\C#Lesson12_Bank.csproj|solutionrelative:c#lesson12_bank\\models\\bank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Bank.cs",
+              "DocumentMoniker": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Models\\Bank.cs",
+              "RelativeDocumentMoniker": "C#Lesson12_Bank\\Models\\Bank.cs",
+              "ToolTip": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Models\\Bank.cs",
+              "RelativeToolTip": "C#Lesson12_Bank\\Models\\Bank.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T11:00:54.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BankCard.cs",
+              "DocumentMoniker": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Models\\BankCard.cs",
+              "RelativeDocumentMoniker": "C#Lesson12_Bank\\Models\\BankCard.cs",
+              "ToolTip": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Models\\BankCard.cs",
+              "RelativeToolTip": "C#Lesson12_Bank\\Models\\BankCard.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAADwvy0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T11:00:47.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Models\\User.cs",
+              "RelativeDocumentMoniker": "C#Lesson12_Bank\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Models\\User.cs",
+              "RelativeToolTip": "C#Lesson12_Bank\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T11:00:40.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Program.cs",
+              "RelativeDocumentMoniker": "C#Lesson12_Bank\\Program.cs",
+              "ToolTip": "C:\\Users\\Ferid\\Desktop\\C#\\C#Lesson12_Bank\\C#Lesson12_Bank\\Program.cs*",
+              "RelativeToolTip": "C#Lesson12_Bank\\Program.cs*",
+              "ViewState": "AgIAALAAAAAAAAAAAAAAAMoAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T07:26:31.654Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

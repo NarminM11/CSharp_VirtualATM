@@ -1,0 +1,15 @@
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\bin\Debug\net8.0\C#Lesson12_Bank.exe
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\bin\Debug\net8.0\C#Lesson12_Bank.deps.json
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\bin\Debug\net8.0\C#Lesson12_Bank.runtimeconfig.json
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\bin\Debug\net8.0\C#Lesson12_Bank.dll
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\bin\Debug\net8.0\C#Lesson12_Bank.pdb
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.AssemblyInfoInputs.cache
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.AssemblyInfo.cs
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.csproj.CoreCompileInputs.cache
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.sourcelink.json
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.dll
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\refint\C#Lesson12_Bank.dll
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.pdb
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\C#Lesson12_Bank.genruntimeconfig.cache
+C:\Users\Ferid\Desktop\C#\C#Lesson12_Bank\C#Lesson12_Bank\obj\Debug\net8.0\ref\C#Lesson12_Bank.dll
