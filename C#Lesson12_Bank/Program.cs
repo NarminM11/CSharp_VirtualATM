@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Net.NetworkInformation;
+using System.Collections.Generic;
+using System.Linq;
 using C_Lesson12_Bank.Models;
+
 public class HelloWorld
 {
     public static void Main(string[] args)
     {
-
-        User[] users = new User[5];  
+        User[] users = new User[5];
 
         users[0] = new User("Ali", "Mammadov", new BankCard("Kapital Bank", "Ali Mammadov", "1234567890123456", "4569", "123", new DateTime(2026, 5, 31), 1000));
         users[1] = new User("Aysel", "Aliyeva", new BankCard("ABB", "Aysel Aliyeva", "2345678901234567", "1256", "456", new DateTime(2025, 12, 31), 2000));
@@ -14,72 +15,82 @@ public class HelloWorld
         users[3] = new User("Nigar", "Huseynova", new BankCard("Bank Respublika", "Nigar Huseynova", "4567890123456789", "9641", "321", new DateTime(2027, 6, 30), 3000));
         users[4] = new User("Elchin", "Quliyev", new BankCard("AccessBank", "Elchin Quliyev", "5678901234567890", "3265", "654", new DateTime(2025, 9, 15), 500));
 
-        // foreach (var user in users)
-        // {
-        //     Console.WriteLine(user);
-        // }
-
         Bank bank = new Bank();
         bank.Clients = users;
 
-        List<(DateTime Time, string Description)> operationHistory = new List<(DateTime, string)>(); //userin etdiyi emeliyyatlari liste yigmaqa
+        List<(DateTime Time, string Description)> operationHistory = new List<(DateTime, string)>();
 
-        //pin-i dogrulama
-        User currentUser;
         Console.WriteLine(@"+------------------------------------------------+
 |              WELCOME TO GENERAL BANK ATM       |
 +------------------------------------------------+");
-        string pin;
+
         Console.Write("Please enter PIN number: ");
-        pin = Console.ReadLine();
+        string pin = Console.ReadLine();
         while (!bank.CheckPin(pin))
         {
             Console.WriteLine("Incorrect PIN. Try again.");
             Console.Write("Please enter PIN number: ");
             pin = Console.ReadLine();
         }
-        bank.SearchByPIN(pin);
+
+        User currentUser = bank.FindUserByPIN(pin);
+        if (currentUser == null)
+        {
+            Console.WriteLine("User not found.");
+            return;
+        }
+
+        string[] menuOptions = new string[]
+        {
+            "Show Card Information",
+            "Check Balance",
+            "Withdraw Cash",
+            "Transaction History",
+            "Transfer Money",
+            "Exit"
+        };
+
+        int selectedIndex = 0;
+
         while (true)
         {
-            currentUser = bank.FindUserByPIN(pin);
-            if (currentUser == null)
+            Console.Clear();
+            Console.WriteLine("+------------------------------------------------+");
+            Console.WriteLine("|              GENERAL BANK MAIN MENU            |");
+            Console.WriteLine("+------------------------------------------------+\n");
+
+            for (int i = 0; i < menuOptions.Length; i++)
             {
-                Console.WriteLine("User not found for this PIN.");
-                continue;
-            }
-            var card = currentUser.CreditCard;
-
-            Console.WriteLine(@"+------------------------------------------------+
-| 1. Check Balance                               |
-| 2. Withdraw Cash                               |
-| 3. Transaction History                         |
-| 4. Transfer Money                              |
-| 5. Exit                                        |
-+------------------------------------------------+
-Please enter your choice: _
-");
-            //Console.WriteLine("\nSelect operation:");
-            //Console.WriteLine("0.Show card informations");
-            //Console.WriteLine("1. Check Balance");
-            //Console.WriteLine("2. Withdraw Cash");
-            //Console.WriteLine("3. Check bank card history");
-            //Console.WriteLine("4. Transfer money");
-            //Console.WriteLine("5. Exit");
-            //Console.Write("Your choice: ");
-
-            string input = Console.ReadLine();
-            int operation_choice;
-            string operation;
-
-            if (!int.TryParse(input, out operation_choice))
-            {
-                Console.WriteLine("Please enter a valid number!");
-                continue;
+                if (i == selectedIndex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"-> {menuOptions[i]}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine($"   {menuOptions[i]}");
+                }
             }
 
-            if (operation_choice == 0)
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.UpArrow)
             {
-                Console.WriteLine($@"
+                selectedIndex = (selectedIndex == 0) ? menuOptions.Length - 1 : selectedIndex - 1;
+            }
+            else if (key.Key == ConsoleKey.DownArrow)
+            {
+                selectedIndex = (selectedIndex == menuOptions.Length - 1) ? 0 : selectedIndex + 1;
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                Console.Clear();
+                var card = currentUser.CreditCard;
+
+                switch (selectedIndex)
+                {
+                    case 0:
+                        Console.WriteLine($@"
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                             CREDIT CARD                                    │
 │                                                                            │
@@ -90,134 +101,145 @@ Please enter your choice: _
 │                                                          Bank: {card.BankName,-10}│
 └────────────────────────────────────────────────────────────────────────────┘
 ");
-            }
-            else if (operation_choice == 1)
-            {
-                bank.UserBalance(pin);
-                operationHistory.Add((DateTime.Now, "Withdrew 10 AZN from balance."));
+                        break;
 
-            }
-            else if (operation_choice == 2)
-            {
-                Console.WriteLine("Enter cash amount: 1. 10AZN  2. 20AZN  3. 50AZN  4. 100AZN  5. Enter your own amount");
-                string cashInput = Console.ReadLine();
-                int cash_choice;
+                    case 1:
+                        bank.UserBalance(pin);
+                        break;
 
-                if (!int.TryParse(cashInput, out cash_choice))
-                {
-                    Console.WriteLine("Invalid input!");
-                    continue;
+                    case 2: // money cash
+                        string[] cashOptions = { "10 AZN", "20 AZN", "50 AZN", "100 AZN", "Custom Amount", "Back" };
+                        int cashIndex = 0;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Choose an amount to withdraw:\n");
+
+                            for (int i = 0; i < cashOptions.Length; i++)
+                            {
+                                if (i == cashIndex)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine($"-> {cashOptions[i]}");
+                                    Console.ResetColor();
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"   {cashOptions[i]}");
+                                }
+                            }
+
+                            var cashKey = Console.ReadKey(true);
+                            if (cashKey.Key == ConsoleKey.UpArrow)
+                                cashIndex = (cashIndex == 0) ? cashOptions.Length - 1 : cashIndex - 1;
+                            else if (cashKey.Key == ConsoleKey.DownArrow)
+                                cashIndex = (cashIndex == cashOptions.Length - 1) ? 0 : cashIndex + 1;
+                            else if (cashKey.Key == ConsoleKey.Enter)
+                            {
+                                if (cashIndex == cashOptions.Length - 1) break; 
+                                int amount = 0;
+                                if (cashIndex == 0) amount = 10;
+                                else if (cashIndex == 1) amount = 20;
+                                else if (cashIndex == 2) amount = 50;
+                                else if (cashIndex == 3) amount = 100;
+                                else if (cashIndex == 4)
+                                {
+                                    Console.Write("Enter custom amount: ");
+                                    int.TryParse(Console.ReadLine(), out amount);
+                                }
+
+                                if (amount > 0)
+                                {
+                                    bank.Cash(pin, amount);
+                                    operationHistory.Add((DateTime.Now, $"Withdrew {amount} AZN from balance."));
+                                }
+
+                                Console.WriteLine("\nPress any key to return...");
+                                Console.ReadKey();
+                                break;
+                            }
+                        }
+                        break;
+
+                    case 3: // history
+                        string[] historyOptions = { "Last 1 day", "Last 5 days", "Last 10 days", "Back" };
+                        int historyIndex = 0;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("View Transaction History:\n");
+                            for (int i = 0; i < historyOptions.Length; i++)
+                            {
+                                if (i == historyIndex)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine($"-> {historyOptions[i]}");
+                                    Console.ResetColor();
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"   {historyOptions[i]}");
+                                }
+                            }
+
+                            var hKey = Console.ReadKey(true);
+                            if (hKey.Key == ConsoleKey.UpArrow)
+                                historyIndex = (historyIndex == 0) ? historyOptions.Length - 1 : historyIndex - 1;
+                            else if (hKey.Key == ConsoleKey.DownArrow)
+                                historyIndex = (historyIndex == historyOptions.Length - 1) ? 0 : historyIndex + 1;
+                            else if (hKey.Key == ConsoleKey.Enter)
+                            {
+                                if (historyIndex == 3) break;
+                                int days = historyIndex switch
+                                {
+                                    0 => 1,
+                                    1 => 5,
+                                    2 => 10,
+                                    _ => 0
+                                };
+
+                                var filtered = operationHistory
+                                    .Where(op => op.Time >= DateTime.Now.AddDays(-days)).ToList();
+
+                                Console.Clear();
+                                Console.WriteLine($"Transactions from last {days} day(s):\n");
+                                if (filtered.Count == 0)
+                                    Console.WriteLine("No transactions.");
+                                else
+                                    foreach (var entry in filtered)
+                                        Console.WriteLine($"{entry.Time}: {entry.Description}");
+
+                                Console.WriteLine("\nPress any key to return...");
+                                Console.ReadKey();
+                                break;
+                            }
+                        }
+                        break;
+
+                    case 4:
+                        Console.Write("Enter recipient's PIN: ");
+                        string secondPin = Console.ReadLine();
+                        var recipient = bank.FindUserByPIN(secondPin);
+                        if (recipient == null)
+                        {
+                            Console.WriteLine("Invalid PIN.");
+                            break;
+                        }
+                        Console.Write("Enter amount to transfer: ");
+                        if (int.TryParse(Console.ReadLine(), out int transferAmount))
+                        {
+                            bank.TransferMoney(pin, secondPin, transferAmount);
+                            operationHistory.Add((DateTime.Now, $"Transferred {transferAmount} AZN to {secondPin}"));
+                        }
+                        break;
+
+                    case 5:
+                        Console.WriteLine("Thank you for using General Bank ATM. Goodbye!");
+                        return;
                 }
 
-                if (cash_choice == 1)
-                {
-                    bank.Cash(pin, 10);
-                    operationHistory.Add((DateTime.Now, "Withdrew 10 AZN from balance."));
-                }
-                else if (cash_choice == 2) { 
-                    bank.Cash(pin, 20);
-                    operationHistory.Add((DateTime.Now, "Withdrew 20 AZN from balance."));
-                }
-                else if (cash_choice == 3) { 
-                    bank.Cash(pin, 50);
-                    operationHistory.Add((DateTime.Now, "Withdrew 50 AZN from balance."));
-                }
-                else if (cash_choice == 4)
-                {
-                    bank.Cash(pin, 100);
-                    operationHistory.Add((DateTime.Now, "Withdrew 100 AZN from balance."));
-
-                }
-                else if (cash_choice == 5)
-                {
-                    Console.Write("Enter custom cash amount: ");
-                    if (int.TryParse(Console.ReadLine(), out int customAmount))
-                    {
-                        bank.Cash(pin, customAmount);
-                        operationHistory.Add((DateTime.Now, $"Withdrew {customAmount} AZN from balance."));
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid amount entered.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice.");
-                }
-
-            }
-            else if (operation_choice == 3)
-            {
-                Console.WriteLine("Choose: 1.Last 1 day 2.Last 5 day 3.Last 10 day");
-                string choiceInput = Console.ReadLine();
-                int choice;
-                if (!int.TryParse(choiceInput, out choice))
-                {
-                    Console.WriteLine("Invalid input!");
-                    continue;
-                }
-
-                List<(DateTime Time, string Description)> filteredHistory = null;
-
-                if (choice == 1)
-                {
-                    filteredHistory = operationHistory
-                                            .Where(op => op.Time >= DateTime.Now.AddDays(-1))
-                                            .ToList();
-                }
-                else if (choice == 2)
-                {
-                    filteredHistory = operationHistory
-                                            .Where(op => op.Time >= DateTime.Now.AddDays(-5))
-                                            .ToList();
-                }
-                else if (choice == 3)
-                {
-                    filteredHistory = operationHistory
-                                            .Where(op => op.Time >= DateTime.Now.AddDays(-10))
-                                            .ToList();
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice.");
-                    continue;
-                }
-
-                Console.WriteLine("\n--- Transaction History ---");
-                foreach (var entry in filteredHistory)
-                {
-                    Console.WriteLine($"{entry.Time}: {entry.Description}");
-                }
-            }
-            else if (operation_choice == 4)
-            {
-                Console.Write("Please enter second PIN number: ");
-                string second_pin = Console.ReadLine();
-                User recipientUser = bank.FindUserByPIN(second_pin);
-                if (recipientUser == null)
-                {
-                    Console.WriteLine("The receiver's PIN is invalid.");
-                    continue;
-                }
-                bank.SearchByPIN(second_pin);
-                Console.Write("Enter custom cash amount: ");
-                if (int.TryParse(Console.ReadLine(), out int transfer_amount))
-                {
-                    bank.TransferMoney(pin, second_pin, transfer_amount);
-                    operationHistory.Add((DateTime.Now, $"Transferred {transfer_amount} AZN to card with PIN {second_pin}"));
-
-                }
-            }
-            else if (operation_choice == 5)
-            {
-                Console.WriteLine("Exiting the system. Goodbye!");
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Invalid operation choice.");
+                //Console.WriteLine("\nPress any key to return to menu...");
+                Console.ReadKey(true);
             }
         }
     }
